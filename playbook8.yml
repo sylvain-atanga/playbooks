@@ -1,0 +1,11 @@
+---
+- name: run docker container remotely
+  hosts: all
+  tasks:
+   - name: install inginx
+     docker_container:
+      name: mynginx
+      image: nginx
+      ports:
+       - 8989:80
+...

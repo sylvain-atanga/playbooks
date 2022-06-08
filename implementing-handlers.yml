@@ -1,0 +1,29 @@
+---
+- name: Applying Handlers
+  hosts: all
+  tasks:
+   - name: Install apache2
+     apt:
+      name: apache2
+      state: present
+      update_cache: yes
+     notify: check url response
+   - name: Edit index.html file
+     copy:
+      content: "Welcome to my DevOps training session. Expect a shift in your financial statut this year"
+      dest: /var/www/html/index.html
+     notify: Restart apache2
+  handlers:
+   - name: Restart apache2
+     service:
+      name: apache2
+      state: restarted
+   - name: check url response
+     uri:
+      url: "{{item}}"
+      status_code: 200
+     with_items:
+      - http://18.212.8.179
+      - http://3.88.215.90
+
+...

@@ -1,0 +1,14 @@
+---
+- name: Implementing payscope variables
+  hosts: all
+  vars:
+    - a: git
+    - b: present
+    - c: yes
+  tasks:
+    - name: Install software applications
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+...

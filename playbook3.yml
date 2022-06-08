@@ -1,0 +1,37 @@
+---
+- name: Tomcat9 configuration
+  hosts: all
+  tasks:
+   - name: Install tomcat9
+     apt:
+      name: tomcat9
+      state: present
+      update_cache: no
+   - name: Install tomcat9-admin
+     apt:
+      name: tomcat9-admin
+      state: present
+      update_cache: no
+   - name: Copy tomcat-users.xml file
+     copy:
+      src: tomcat-users.xml
+      dest: /etc/tomcat9
+   - name: change the port number of tomcat9
+     replace:
+      regexp: 8080
+      replace: 9090
+   - name: Restart tomcat9
+     service:
+      name: tomcat9
+      state: restarted
+   - name: Check tomcat url
+     uri:
+      url: http://3.86.146.192
+      status_code: 200
+   - name: Check tomcat url
+     uri:
+      url: http://3.86.146.192
+      status_code: 200
+
+...
+

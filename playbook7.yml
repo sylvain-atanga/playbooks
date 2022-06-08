@@ -1,0 +1,16 @@
+---
+- name: Configure instances for docker activities
+  hosts: all
+  tasks:
+   - name: Install python pip
+     apt:
+      name: python3-pip
+      state: present
+      update_cache: yes
+   - name: Install docker on all instances
+     shell: curl -fsSL https://test.docker.com -o test-docker.sh
+   - name: execute the above shell script
+     shell: sh test-docker.sh
+   - name: install docker-py
+     shell: pip3 install docker-py
+...

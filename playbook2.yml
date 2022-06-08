@@ -1,0 +1,27 @@
+---
+- name: configure apache2
+  hosts: all
+  tasks:
+   - name: install apache2
+     apt:
+      name: apache2
+      state: present
+      update_cache: no
+   - name: Edith the index.html file
+     copy: 
+      content: "welcome to devops training for the year 2000 and 2022"
+      dest: /var/www/html/index.html
+   - name: Restart apache2
+     service:
+      name: apache2
+      state: restarted
+   - name: check url response of apache2 on server1
+     uri:
+      url: http://3.86.146.192
+      status_code: 200
+   - name: check url response of apache2 on server1
+     uri:
+      url: http://54.165.240.151
+      status_code: 200
+
+...

@@ -1,0 +1,11 @@
+---
+- name: run another container
+  hosts: all 
+  become: yes
+  tasks:
+   - name: running multiple containers
+     docker_container:
+      name: "container{{item}}"
+      image: nginx
+     with_sequence: count=10
+...
